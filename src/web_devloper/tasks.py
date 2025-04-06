@@ -1,15 +1,15 @@
 from crewai import  Task
-# from crewai_tools import SerperDevTool
-from crewai.tools import (
-    ApifyActorsTool, BrowserbaseLoadTool, CodeDocsSearchTool, CodeInterpreterTool,
-    ComposioTool, CSVSearchTool, DALL_E_Tool, DirectorySearchTool, DOCXSearchTool,
-    DirectoryReadTool, EXASearchTool, FileReadTool, FirecrawlSearchTool, FirecrawlCrawlWebsiteTool,
-    FirecrawlScrapeWebsiteTool, GithubSearchTool, SerperDevTool, TXTSearchTool, JSONSearchTool,
-    LlamaIndexTool, MDXSearchTool, PDFSearchTool, PGSearchTool, VisionTool, RagTool,
-    ScrapeElementFromWebsiteTool, ScrapeWebsiteTool, WebsiteSearchTool, XMLSearchTool,
-    YoutubeChannelSearchTool, YoutubeVideoSearchTool, DecisionSupportTool
-)
-from crewai import Tool
+from crewai_tools import SerperDevTool
+# from crewai.tools import (
+#      BrowserbaseLoadTool, CodeDocsSearchTool, CodeInterpreterTool,
+#     ComposioTool, CSVSearchTool, DALL_E_Tool, DirectorySearchTool, DOCXSearchTool,
+#     DirectoryReadTool, EXASearchTool, FileReadTool, FirecrawlSearchTool, FirecrawlCrawlWebsiteTool,
+#     FirecrawlScrapeWebsiteTool, GithubSearchTool, SerperDevTool, TXTSearchTool, JSONSearchTool,
+#     LlamaIndexTool, MDXSearchTool, PDFSearchTool, PGSearchTool, VisionTool, RagTool,
+#     ScrapeElementFromWebsiteTool, ScrapeWebsiteTool, WebsiteSearchTool, XMLSearchTool,
+#     YoutubeChannelSearchTool, YoutubeVideoSearchTool, DecisionSupportTool
+# )
+# from crewai import Tool
 from dotenv import load_dotenv
 import os 
 load_dotenv()
@@ -17,39 +17,39 @@ load_dotenv()
 
 os.getenv("GEMINI_API_KEY")
 
-from crewai import Tool
+# from crewai import Tool
 
 # Tools Import
-from tools.docx_search import DocxSearchTool
-from tools.research import ResearchTool
-from tools.decision_support import DecisionSupportTool
-from tools.design import DesignTool
-from tools.prototyping import PrototypingTool
-from tools.coding import CodingTool
-from tools.security import SecurityTool
-from tools.database import DatabaseTool
-from tools.frontend_testing import FrontendTestingTool
-from tools.data_security import DataSecurityTool
-from tools.api_documentation import APIDocumentationTool
-from tools.testing import TestingTool
-from tools.security_testing import SecurityTestingTool
-from tools.performance_testing import PerformanceTestingTool
+# from crewai_tools import DocxSearchTool
+# from crewai_tools import ResearchTool
+# from crewai_tools import DecisionSupportTool
+# from crewai_tools import DesignTool
+# from crewai_tools import PrototypingTool
+# from crewai_tools import CodingTool
+# from crewai_tools import SecurityTool
+# from crewai_tools import DatabaseTool
+# from crewai_tools import FrontendTestingTool
+# from crewai_tools import DataSecurityTool
+# from crewai_tools import APIDocumentationTool
+# from crewai_tools import TestingTool
+# from crewai_tools import SecurityTestingTool
+# from crewai_tools import PerformanceTestingTool
 
-# Initialize Tools
-docx_search_tool = DocxSearchTool()
-research_tool = ResearchTool()
-decision_support_tool = DecisionSupportTool()
-design_tool = DesignTool()
-prototyping_tool = PrototypingTool()
-coding_tool = CodingTool()
-security_tool = SecurityTool()
-database_tool = DatabaseTool()
-frontend_testing_tool = FrontendTestingTool()
-data_security_tool = DataSecurityTool()
-api_documentation_tool = APIDocumentationTool()
-testing_tool = TestingTool()
-security_testing_tool = SecurityTestingTool()
-performance_testing_tool = PerformanceTestingTool()
+# # Initialize Tools
+# docx_search_tool = DocxSearchTool()
+# research_tool = ResearchTool()
+# decision_support_tool = DecisionSupportTool()
+# design_tool = DesignTool()
+# prototyping_tool = PrototypingTool()
+# coding_tool = CodingTool()
+# security_tool = SecurityTool()
+# database_tool = DatabaseTool()
+# frontend_testing_tool = FrontendTestingTool()
+# data_security_tool = DataSecurityTool()
+# api_documentation_tool = APIDocumentationTool()
+# testing_tool = TestingTool()
+# security_testing_tool = SecurityTestingTool()
+# performance_testing_tool = PerformanceTestingTool()
 
 
 research_tool = SerperDevTool()
@@ -59,22 +59,22 @@ class Web_Developer_Tasks():
     # Task 1
     ##############################################################################################################
 
-    def Requirement_Analysis_Task(self, agent, project_Title, raw_requirements):
+    def Requirement_Analysis_Task(self, agent, project_Title, project_features):
         return Task(
             description=f"""Analyze and refine the raw project requirements for '{project_Title}'. 
 
             The agent will:
-            - Evaluate the given raw requirements: {raw_requirements}
+            - Evaluate the given raw requirements: {project_features}
             - Identify missing details or ambiguities
             - Provide a structured technical document outlining the full project scope
 
             Parameters:
             - Project Title: {project_Title}
-            - Raw Requirements: {raw_requirements}
+            - Project features: {project_features}
 
             The agent will ensure that the requirements are clear, complete, and technically feasible.
             """,
-            tools=[docx_search_tool],
+            tools=[],
             agent=agent,
             expected_output="A well-structured technical document detailing refined project requirements."
         )
@@ -83,165 +83,63 @@ class Web_Developer_Tasks():
     # Task 2
     ##############################################################################################################
 
-    def Tech_Stack_Selection_Task(self, agent, refined_requirements):
+    def HTML_Generation_Task(self, agent, context):
         return Task(
-            description=f"""Select the optimal technology stack based on the refined project requirements.
+            description=f"""Generate a clean and semantic HTML structure based on the project requirements.
 
             The agent will:
-            - Analyze the project scope and functional needs
-            - Identify suitable frontend, backend, database, and deployment technologies
-            - Justify the technology choices based on scalability, security, and performance
+            - Translate the analyzed requirements into static HTML layout
+            - Use proper HTML5 tags and semantic structuring
+            - Include relevant IDs or class placeholders (no styling or scripting)
 
-            Parameters:
-            - Refined Requirements: {refined_requirements}
-
-            The agent will ensure that the selected stack aligns with the project's goals and best industry practices.
+            The agent must exclude any CSS or JavaScript and focus strictly on the HTML markup.
             """,
-            tools=[research_tool, decision_support_tool],
+            tools=[],
             agent=agent,
-            expected_output="A detailed report specifying the chosen tech stack with justifications."
+            context=context,
+            expected_output="Well-structured and complete HTML code for the frontend."
+        )
+    
+    ##############################################################################################################
+    # Task 3 - Tailwind Styler
+    #############################################################################################################
+
+    def Tailwind_Styling_Task(self, agent, context):
+        return Task(
+            description=f"""Enhance the raw HTML with Tailwind CSS utility classes to create a modern, responsive UI.
+
+            The agent will:
+            - Apply Tailwind classes for layout, spacing, typography, colors, and responsiveness
+            - Ensure mobile-first design and accessibility
+            - Avoid using any custom CSS or external stylesheets
+
+            The agent must deliver styled HTML with Tailwind utility classes directly embedded.
+            """,
+            tools=[],
+            agent=agent,
+            context=context,
+            expected_output="Tailwind CSS-styled HTML code ready for rendering in a browser."
         )
 
+
     ##############################################################################################################
-    # Task 3
+    # Task 9 - JavaScript Enhancement
     ##############################################################################################################
 
-    def UI_UX_Design_Task(self, agent, refined_requirements):
+    def JavaScript_Enhancement_Task(self, agent, context):
         return Task(
-            description=f"""Develop wireframes and UI/UX design guidelines based on project requirements.
+            description=f"""Add interactivity to the Tailwind-styled HTML using vanilla JavaScript.
 
             The agent will:
-            - Create wireframes for the key interfaces
-            - Define design principles for user experience, accessibility, and responsiveness
-            - Provide color schemes, typography, and layout recommendations
+            - Identify interactive elements such as buttons, forms, toggles, modals, etc.
+            - Write clean vanilla JavaScript to enhance user interaction
+            - Embed JavaScript at the end of the HTML (inside a <script> tag)
 
-            Parameters:
-            - Refined Requirements: {refined_requirements}
-
-            The agent will deliver a user-friendly and aesthetically pleasing design plan.
+            The agent must avoid using external libraries or frameworks and ensure browser compatibility.
             """,
-            tools=[design_tool, prototyping_tool],
+            tools=[],
             agent=agent,
-            expected_output="A set of wireframes and a UI/UX guideline document."
-        )
-
-    ##############################################################################################################
-    # Task 4
-    ##############################################################################################################
-
-    def Backend_Development_Task(self, agent, tech_stack, refined_requirements):
-        return Task(
-            description=f"""Develop the backend architecture based on the selected technology stack.
-
-            The agent will:
-            - Design the API structure and database schema
-            - Implement authentication, authorization, and security measures
-            - Ensure scalability and efficient data management
-
-            Parameters:
-            - Tech Stack: {tech_stack}
-            - Refined Requirements: {refined_requirements}
-
-            The agent will build a secure and high-performance backend system.
-            """,
-            tools=[coding_tool, security_tool, database_tool],
-            agent=agent,
-            expected_output="A fully functional backend API with database integration."
-        )
-
-    ##############################################################################################################
-    # Task 5
-    ##############################################################################################################
-
-    def Frontend_Development_Task(self, agent, tech_stack, ui_ux_design):
-        return Task(
-            description=f"""Implement the frontend based on the UI/UX design and selected technology stack.
-
-            The agent will:
-            - Convert wireframes into interactive user interfaces
-            - Ensure mobile responsiveness and accessibility compliance
-            - Integrate frontend with backend APIs for dynamic content
-
-            Parameters:
-            - Tech Stack: {tech_stack}
-            - UI/UX Design: {ui_ux_design}
-
-            The agent will deliver a polished and fully functional frontend.
-            """,
-            tools=[coding_tool, frontend_testing_tool],
-            agent=agent,
-            expected_output="A fully developed frontend integrated with the backend."
-        )
-
-    ##############################################################################################################
-    # Task 6
-    ##############################################################################################################
-
-    def Database_Management_Task(self, agent, tech_stack, refined_requirements):
-        return Task(
-            description=f"""Design and configure the database architecture for the project.
-
-            The agent will:
-            - Select an appropriate database type (SQL/NoSQL) based on project needs
-            - Design an optimized schema for fast querying and scalability
-            - Implement data security measures like encryption and backups
-
-            Parameters:
-            - Tech Stack: {tech_stack}
-            - Refined Requirements: {refined_requirements}
-
-            The agent will ensure an efficient and secure database implementation.
-            """,
-            tools=[database_tool, data_security_tool],
-            agent=agent,
-            expected_output="A fully optimized and secure database structure."
-        )
-
-    ##############################################################################################################
-    # Task 7
-    ##############################################################################################################
-
-    def API_Development_Task(self, agent, backend_architecture):
-        return Task(
-            description=f"""Develop and document RESTful or GraphQL APIs for frontend-backend communication.
-
-            The agent will:
-            - Implement secure, efficient, and scalable API endpoints
-            - Ensure proper authentication and role-based access control
-            - Provide API documentation for easy integration
-
-            Parameters:
-            - Backend Architecture: {backend_architecture}
-
-            The agent will deliver a well-documented and functional API service.
-            """,
-            tools=[coding_tool, api_documentation_tool],
-            agent=agent,
-            expected_output="A fully developed API with complete documentation."
-        )
-
-    ##############################################################################################################
-    # Task 8
-    ##############################################################################################################
-
-    def Testing_Debugging_Task(self, agent, frontend, backend, api_services):
-        return Task(
-            description=f"""Conduct comprehensive testing of frontend, backend, and APIs.
-
-            The agent will:
-            - Perform unit testing, integration testing, and end-to-end testing
-            - Identify and document bugs and performance bottlenecks
-            - Suggest improvements to enhance stability and security
-
-            Parameters:
-            - Frontend: {frontend}
-            - Backend: {backend}
-            - API Services: {api_services}
-
-            The agent will ensure a bug-free and optimized application.
-            """,
-            tools=[testing_tool, security_testing_tool, performance_testing_tool],
-            agent=agent,
-            expected_output="A detailed test report highlighting bugs, fixes, and performance insights."
+            context=context,
+            expected_output="A single HTML file with embedded JavaScript for frontend interactivity."
         )
 
