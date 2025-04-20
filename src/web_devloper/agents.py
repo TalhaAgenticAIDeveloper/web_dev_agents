@@ -9,7 +9,14 @@ model = LLM(model="gemini/gemini-2.0-flash-exp" ,api_key=api_key)
 
 class Web_Developer_Agents:
 
-    
+    def manager(self):
+        return Agent(
+            role = "Project Manager",
+            goal = "Efficiantly manage the crew and enhance high quality tasks",
+            backstory = "you're and experienced project manger",
+            allow_delegation = True,
+            llm = model
+        )
  
     ##################################################################################################
     # Agent 1
@@ -78,3 +85,27 @@ class Web_Developer_Agents:
             """,
             llm=model,
         )
+    
+    ##################################################################################################
+    # Agent: GSAP Web Animator Agent
+    ##################################################################################################
+
+    def GSAP_Animator_Agent(self):
+        return Agent(
+            role="GSAP Animation and Styling Expert",
+            
+            goal="""
+                Enhance the provided HTML file by injecting GSAP animations and styling. Use the existing structure that 
+                includes Tailwind CSS and JavaScript, and apply entrance, hover, scroll, or interaction-based animations 
+                using GSAP. Return the updated HTML file with the GSAP animation logic embedded within.
+            """,
+            
+            backstory="""
+                A motion designer AI specialized in GSAP and modern UI animations. With expertise in crafting visually 
+                engaging interfaces using GreenSock, this AI dynamically adds animation to static Tailwind-styled pages 
+                while ensuring performance and responsiveness are not compromised.
+            """,
+            
+            llm=model,
+        )
+

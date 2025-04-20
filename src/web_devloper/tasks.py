@@ -1,15 +1,5 @@
 from crewai import  Task
 from crewai_tools import SerperDevTool
-# from crewai.tools import (
-#      BrowserbaseLoadTool, CodeDocsSearchTool, CodeInterpreterTool,
-#     ComposioTool, CSVSearchTool, DALL_E_Tool, DirectorySearchTool, DOCXSearchTool,
-#     DirectoryReadTool, EXASearchTool, FileReadTool, FirecrawlSearchTool, FirecrawlCrawlWebsiteTool,
-#     FirecrawlScrapeWebsiteTool, GithubSearchTool, SerperDevTool, TXTSearchTool, JSONSearchTool,
-#     LlamaIndexTool, MDXSearchTool, PDFSearchTool, PGSearchTool, VisionTool, RagTool,
-#     ScrapeElementFromWebsiteTool, ScrapeWebsiteTool, WebsiteSearchTool, XMLSearchTool,
-#     YoutubeChannelSearchTool, YoutubeVideoSearchTool, DecisionSupportTool
-# )
-# from crewai import Tool
 from dotenv import load_dotenv
 import os 
 load_dotenv()
@@ -17,39 +7,7 @@ load_dotenv()
 
 os.getenv("GEMINI_API_KEY")
 
-# from crewai import Tool
 
-# Tools Import
-# from crewai_tools import DocxSearchTool
-# from crewai_tools import ResearchTool
-# from crewai_tools import DecisionSupportTool
-# from crewai_tools import DesignTool
-# from crewai_tools import PrototypingTool
-# from crewai_tools import CodingTool
-# from crewai_tools import SecurityTool
-# from crewai_tools import DatabaseTool
-# from crewai_tools import FrontendTestingTool
-# from crewai_tools import DataSecurityTool
-# from crewai_tools import APIDocumentationTool
-# from crewai_tools import TestingTool
-# from crewai_tools import SecurityTestingTool
-# from crewai_tools import PerformanceTestingTool
-
-# # Initialize Tools
-# docx_search_tool = DocxSearchTool()
-# research_tool = ResearchTool()
-# decision_support_tool = DecisionSupportTool()
-# design_tool = DesignTool()
-# prototyping_tool = PrototypingTool()
-# coding_tool = CodingTool()
-# security_tool = SecurityTool()
-# database_tool = DatabaseTool()
-# frontend_testing_tool = FrontendTestingTool()
-# data_security_tool = DataSecurityTool()
-# api_documentation_tool = APIDocumentationTool()
-# testing_tool = TestingTool()
-# security_testing_tool = SecurityTestingTool()
-# performance_testing_tool = PerformanceTestingTool()
 
 
 research_tool = SerperDevTool()
@@ -97,7 +55,7 @@ class Web_Developer_Tasks():
             tools=[],
             agent=agent,
             context=context,
-            expected_output="Well-structured and complete HTML code for the frontend."
+            expected_output="Well-structured and complete HTML code for the frontend. nothing except code"
         )
     
     ##############################################################################################################
@@ -118,7 +76,7 @@ class Web_Developer_Tasks():
             tools=[],
             agent=agent,
             context=context,
-            expected_output="Tailwind CSS-styled HTML code ready for rendering in a browser."
+            expected_output="Tailwind CSS-styled HTML code ready for rendering in a browser.nothing except code"
         )
 
 
@@ -140,6 +98,27 @@ class Web_Developer_Tasks():
             tools=[],
             agent=agent,
             context=context,
-            expected_output="A single HTML file with embedded JavaScript for frontend interactivity."
+            expected_output="A single HTML file with embedded JavaScript for frontend interactivity.nothing except code"
         )
 
+    ##################################################################################################
+    # Task: GSAP Animation Integration Task
+    ##################################################################################################
+
+    def GSAP_Animation_Task(self, agent, context):
+        return Task(
+            description=f"""Inject GSAP animations into the provided HTML file.
+
+            The agent will:
+            - Scan the HTML and identify suitable elements (e.g., hero sections, buttons, cards)
+            - Add GSAP CDN link in the head (if not already present)
+            - Write JavaScript code using GSAP to animate elements on load, scroll, or hover
+            - Embed that JS into a <script> tag at the end of the HTML file
+
+            The returned file must be a complete HTML document with animations working on top of Tailwind CSS and any pre-existing JavaScript.
+            """,
+            tools=[],
+            agent=agent,
+            context=context,
+            expected_output="A fully updated HTML file with GSAP animations integrated and ready to run in the browser."
+        )

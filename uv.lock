@@ -3849,6 +3849,7 @@ source = { editable = "." }
 dependencies = [
     { name = "crewai" },
     { name = "crewai-tools" },
+    { name = "litellm" },
     { name = "markdown" },
     { name = "streamlit" },
 ]
@@ -3857,6 +3858,7 @@ dependencies = [
 requires-dist = [
     { name = "crewai", specifier = ">=0.108.0" },
     { name = "crewai-tools", specifier = ">=0.38.1" },
+    { name = "litellm", specifier = ">=1.60.2" },
     { name = "markdown", specifier = ">=3.7" },
     { name = "streamlit", specifier = ">=1.44.1" },
 ]
